@@ -1,0 +1,2 @@
+El formulario de registro no tiene el contenido de los modales de todos los checkboxes.
+Falta por definir los mails.
