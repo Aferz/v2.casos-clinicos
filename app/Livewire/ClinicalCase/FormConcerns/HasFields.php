@@ -2,6 +2,10 @@
 
 namespace App\Livewire\ClinicalCase\FormConcerns;
 
+use App\Services\Fields\BooleanField;
+use App\Services\Fields\StringField;
+use App\Services\Fields\TextField;
+
 trait HasFields
 {
     public array $models = [];
@@ -16,7 +20,15 @@ trait HasFields
         $clinicalCase = $this->clinicalCase();
 
         foreach (fields() as $field) {
-            $this->models[$field->name()] = $clinicalCase->{$field->name()} ?? '';
+            $default = null;
+
+            if ($field instanceof StringField || $field instanceof TextField) {
+                $default = '';
+            } elseif ($field instanceof BooleanField) {
+                $default = false;
+            }
+
+            $this->models[$field->name()] = $clinicalCase->{$field->name()} ?? $default;
         }
     }
 

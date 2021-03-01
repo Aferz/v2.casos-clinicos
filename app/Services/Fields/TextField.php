@@ -36,7 +36,7 @@ class TextField extends Field
 
         return view('components.input.textarea-label', [
             'id' => $this->name,
-            'label' => ucfirst(__($this->name)),
+            'label' => ucfirst(__($this->label())),
             'theme' => $errors->first($this->name) ? 'error' : 'primary',
             'attributes' => new ComponentAttributeBag(array_merge([
                 'wire:model.defer' => "models.{$this->name}",

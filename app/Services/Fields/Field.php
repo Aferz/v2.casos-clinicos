@@ -23,6 +23,17 @@ abstract class Field
         return $this->name;
     }
 
+    public function label(): string
+    {
+        if (isset($this->data['label'])) {
+            return is_callable($this->data['label'])
+                ? $this->data['label']()
+                : $this->data['label'];
+        }
+
+        return $this->name;
+    }
+
     public function migration(Blueprint $table): ColumnDefinition
     {
         $data = $this->getMigrationInstructions();
@@ -41,7 +52,9 @@ abstract class Field
         $data = $this->getFactoryInstructions($faker);
 
         if (isset($data['value'])) {
-            return $data['value'];
+            return is_callable($data['value'])
+                ? $data['value']()
+                : $data['value'];
         }
 
         if (isset($data['property'])) {

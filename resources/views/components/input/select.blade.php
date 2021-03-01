@@ -28,7 +28,7 @@
     @endphp
 
     @foreach ($options as $option)
-        @if (is_array($option))
+        @if (isset($option[$valueKey]))
             <option
                 {{ $value === $option[$valueKey] ? 'selected' : '' }}
                 value="{{ $option[$valueKey] }}"

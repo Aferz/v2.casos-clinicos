@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Speciality extends Model
 {
-    //
+    public $guarded = [
+        //
+    ];
 }

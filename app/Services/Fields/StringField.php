@@ -35,7 +35,7 @@ class StringField extends Field
 
         return view('components.input.text-label', [
             'id' => $this->name,
-            'label' => ucfirst(__($this->name)),
+            'label' => ucfirst(__($this->label())),
             'theme' => $errors->first($this->name) ? 'error' : 'primary',
             'attributes' => new ComponentAttributeBag(array_merge([
                 'wire:model.defer' => "models.{$this->name}",

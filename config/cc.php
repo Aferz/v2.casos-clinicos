@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ClinicalCaseSpeciality;
 use App\Services\EvaluationCriteria\BooleanEvaluationCriterion;
 use App\Services\EvaluationCriteria\NumericEvaluationCriterion;
 use App\Services\Features\BibliographiesFeature;
@@ -9,6 +10,8 @@ use App\Services\Features\HighlightFeature;
 use App\Services\Features\ImagesFeature;
 use App\Services\Features\LikesFeature;
 use App\Services\Features\ShareFeature;
+use App\Services\Fields\BooleanField;
+use App\Services\Fields\SelectField;
 use App\Services\Fields\StringField;
 use App\Services\Fields\TextField;
 
@@ -27,7 +30,7 @@ return [
 
     'app' => [
         'service_id' => 1,
-        'lab_name' => 'Grünenthal',
+        'lab_name' => 'Abbott',
     ],
 
     /*
@@ -130,36 +133,43 @@ return [
             ],
         ],
 
+        'speciality' => [
+            'type' => SelectField::class,
+            'factory' => [
+                'value' => fn () => ClinicalCaseSpeciality::all()->random(),
+            ],
+            'render' => [
+                'attributes' => [
+                    'valueKey' => 'id',
+                    'textKey' => 'name',
+                    'options' => fn () => ClinicalCaseSpeciality::all(),
+                ],
+            ],
+        ],
+
         'author' => [
             'type' => StringField::class,
+        ],
+
+        'summary' => [
+            'type' => TextField::class,
         ],
 
         'keywords' => [
             'type' => StringField::class,
         ],
 
-        'background' => [
-            'type' => TextField::class,
-        ],
-
-        'physical_test' => [
-            'type' => TextField::class,
-        ],
-
         'introduction' => [
             'type' => TextField::class,
         ],
 
-        'diagnosis' => [
+        'conclusion' => [
             'type' => TextField::class,
         ],
 
-        'treatment' => [
-            'type' => TextField::class,
-        ],
-
-        'evolution' => [
-            'type' => TextField::class,
+        'use_vital_peptide' => [
+            'type' => BooleanField::class,
+            'label' => fn () => __('Use Vital Peptide'),
         ],
     ],
 
@@ -210,7 +220,7 @@ return [
             NumericEvaluationCriterion::class => [
                 'theme' => 'stars',
                 'min' => 1,
-                'max' => 5,
+                'max' => 10,
             ],
         ],
     ],
@@ -316,7 +326,7 @@ return [
 
         'share' => [
             'class' => ShareFeature::class,
-            'enabled' => true,
+            'enabled' => false,
         ],
 
         /*
@@ -333,7 +343,7 @@ return [
 
         'highlight' => [
             'class' => HighlightFeature::class,
-            'enabled' => true,
+            'enabled' => false,
         ],
 
         /*
@@ -354,4 +364,5 @@ return [
             'enabled' => true,
         ],
     ],
+
 ];

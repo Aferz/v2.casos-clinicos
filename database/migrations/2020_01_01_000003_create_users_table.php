@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -40,30 +39,6 @@ class CreateUsersTable extends Migration
                 ->references('id')
                 ->on('countries');
         });
-
-        User::create([
-            'name' => 'Admin',
-            'lastname1' => 'Admin',
-            'email' => 'admin@casosclinicos.com',
-            'password' => bcrypt('Password1%'),
-            'is_admin' => true,
-        ]);
-
-        User::create([
-            'name' => 'Coordinador',
-            'lastname1' => '1',
-            'email' => 'coordinator@casosclinicos.com',
-            'password' => bcrypt('Password1%'),
-            'is_coordinator' => true,
-        ]);
-
-        User::create([
-            'name' => 'Coordinador',
-            'lastname1' => '2',
-            'email' => 'coordinator2@casosclinicos.com',
-            'password' => bcrypt('Password1%'),
-            'is_coordinator' => true,
-        ]);
     }
 
     public function down(): void

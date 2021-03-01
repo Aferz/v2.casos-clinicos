@@ -23,7 +23,7 @@
     </div>
 
     <div class="ml-3 text-sm">
-        @if (! $slot->isEmpty())
+        @if (isset($slot) && !$slot->isEmpty())
             {{ $slot }}
         @else
             <x-util.label for="{{ $id }}">

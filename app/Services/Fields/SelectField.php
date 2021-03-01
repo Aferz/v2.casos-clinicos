@@ -39,7 +39,7 @@ class SelectField extends Field
 
         return view('components.input.select-label', array_merge([
             'id' => $this->name,
-            'label' => ucfirst(__($this->name)),
+            'label' => ucfirst(__($this->label())),
             'theme' => $errors->first($this->name) ? 'error' : 'primary',
             'attributes' => new ComponentAttributeBag(array_merge([
                 'wire:model.defer' => "models.{$this->name}",
@@ -49,7 +49,7 @@ class SelectField extends Field
 
     protected function partitionAttributesAndProps(array $attributes): array
     {
-        $props = ['options'];
+        $props = ['value', 'textKey', 'valueKey', 'options', 'disabled'];
 
         return [
             Arr::only($attributes, $props),

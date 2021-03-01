@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
 
         $this->removeMedia();
 
+        $this->call(ProductionSeeder::class);
         $this->call(UsersSeeder::class);
         $this->call(ClinicalCasesSeeder::class);
         $this->call(EvaluationsSeeder::class);
