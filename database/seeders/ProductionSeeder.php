@@ -14,7 +14,6 @@ class ProductionSeeder extends Seeder
     {
         $this->createCountries();
         $this->createSpecialities();
-        $this->createClinicalCaseSpecialities();
         $this->createAdmins();
         $this->createCoordinators();
     }

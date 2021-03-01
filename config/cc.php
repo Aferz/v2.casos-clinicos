@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\ClinicalCaseSpeciality;
 use App\Services\EvaluationCriteria\BooleanEvaluationCriterion;
 use App\Services\EvaluationCriteria\NumericEvaluationCriterion;
 use App\Services\Features\BibliographiesFeature;
@@ -11,7 +10,6 @@ use App\Services\Features\ImagesFeature;
 use App\Services\Features\LikesFeature;
 use App\Services\Features\ShareFeature;
 use App\Services\Fields\BooleanField;
-use App\Services\Fields\SelectField;
 use App\Services\Fields\StringField;
 use App\Services\Fields\TextField;
 
@@ -130,20 +128,6 @@ return [
             'type' => StringField::class,
             'validation' => [
                 'draft' => 'required|string|max:255',
-            ],
-        ],
-
-        'speciality' => [
-            'type' => SelectField::class,
-            'factory' => [
-                'value' => fn () => ClinicalCaseSpeciality::all()->random(),
-            ],
-            'render' => [
-                'attributes' => [
-                    'valueKey' => 'id',
-                    'textKey' => 'name',
-                    'options' => fn () => ClinicalCaseSpeciality::all(),
-                ],
             ],
         ],
 
