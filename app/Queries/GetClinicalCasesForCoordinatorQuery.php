@@ -67,6 +67,7 @@ class GetClinicalCasesForCoordinatorQuery
             ->when($this->status === 'evaluated', fn ($q) => $q->having('status', 'evaluated'))
             ->when($this->status === 'not-evaluated', fn ($q) => $q->having('status', 'not-evaluated'))
             ->whereNotNull('clinical_cases.sent_at')
+            ->whereIn('speciality', $this->getAllowedSpecialities())
             ->groupBy('clinical_cases.id')
             ->orderBy($this->orderField(), $this->orderDirection());
     }
@@ -77,6 +78,14 @@ class GetClinicalCasesForCoordinatorQuery
             ->select(DB::raw('evaluations.clinical_case_id'))
             ->where('evaluations.user_id', id($this->user))
             ->groupBy('evaluations.clinical_case_id');
+    }
+
+    protected function getAllowedSpecialities(): array
+    {
+        return $this->user
+            ->clinicalCaseSpecialities()
+            ->pluck('clinical_case_speciality_id')
+            ->all();
     }
 
     protected function allowedOrderFieldNames(): array

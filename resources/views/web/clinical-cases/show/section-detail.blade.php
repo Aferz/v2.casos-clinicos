@@ -23,7 +23,11 @@
             </div>
 
             <div class="mt-1 space-y-8 text-gray-700">
-                {{ $clinicalCase->{$field->name()} }}
+                @if ($field instanceof \App\Services\Fields\BooleanField)
+                    {{ $clinicalCase->{$field->name()} === 1 ? __('Yes') : __('No') }}
+                @else
+                    {{ $clinicalCase->{$field->name()} }}
+                @endif
             </div>
         @endforeach
 

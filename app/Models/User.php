@@ -7,6 +7,7 @@ use App\Events\UserSaved;
 use App\Notifications\Auth\ResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -49,6 +50,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(ClinicalCase::class)
             ->latest();
+    }
+
+    public function clinicalCaseSpecialities(): BelongsToMany
+    {
+        return $this->belongsToMany(ClinicalCaseSpeciality::class);
     }
 
     public function getFullnameAttribute(): string

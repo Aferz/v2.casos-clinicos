@@ -23,7 +23,7 @@ class CreateClinicalCaseSpecialityUserTable extends Migration
 
             $table->foreign('user_id')
                 ->references('id')
-                ->on('clinical_cases');
+                ->on('users');
         });
     }
 

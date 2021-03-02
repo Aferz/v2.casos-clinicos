@@ -22,8 +22,11 @@ class ClinicalCasePolicy
         }
 
         if ($clinicalCase->isSent()) {
+            if ($user->isCoordinator()) {
+                return $user->clinicalCaseSpecialities->contains($clinicalCase->speciality);
+            }
+
             return $user->id === $clinicalCase->user_id
-                || $user->isCoordinator()
                 || $user->isAdmin();
         }
 

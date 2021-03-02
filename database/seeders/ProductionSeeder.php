@@ -89,6 +89,9 @@ class ProductionSeeder extends Seeder
             'is_coordinator' => true,
         ]);
 
+        $coordinator1->clinicalCaseSpecialities()
+            ->attach([1, 2, 3, 4]);
+
         $coordinator2 = User::create([
             'name' => 'Coordinador',
             'lastname1' => '2',
@@ -96,5 +99,8 @@ class ProductionSeeder extends Seeder
             'password' => bcrypt('Password1%'),
             'is_coordinator' => true,
         ]);
+
+        $coordinator2->clinicalCaseSpecialities()
+            ->attach([5, 6, 7]);
     }
 }
