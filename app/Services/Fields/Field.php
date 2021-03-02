@@ -10,13 +10,19 @@ use Illuminate\View\View;
 
 abstract class Field
 {
-    public function __construct(
-        protected string $name,
-        protected array $data = []
-    ) {
+    protected string $name;
+    protected array $data;
+
+    public function __construct(string $name, array $data = [])
+    {
+        $this->name = $name;
+        $this->data = $data;
     }
 
-    abstract public function renderForm(ViewErrorBag $errors): string | View;
+    /**
+     * @return string|View
+     */
+    abstract public function renderForm(ViewErrorBag $errors);
 
     public function name(): string
     {
@@ -47,7 +53,10 @@ abstract class Field
         return $column;
     }
 
-    public function factory(Generator $faker): mixed
+    /**
+     * @return mixed
+     */
+    public function factory(Generator $faker)
     {
         $data = $this->getFactoryInstructions($faker);
 

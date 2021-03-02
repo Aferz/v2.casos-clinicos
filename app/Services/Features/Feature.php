@@ -4,9 +4,11 @@ namespace App\Services\Features;
 
 abstract class Feature
 {
-    public function __construct(
-        protected array $config
-    ) {
+    protected array $config;
+
+    public function __construct(array $config)
+    {
+        $this->config = $config;
     }
 
     public function enable(): void

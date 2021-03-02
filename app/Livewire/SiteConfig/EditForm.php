@@ -30,7 +30,10 @@ class EditForm extends Component
         return view('livewire.site-config.edit-form');
     }
 
-    public function save(SiteConfiguration $siteConfiguration): Redirector | RedirectResponse
+    /**
+     * @return Redirector|RedirectResponse
+     */
+    public function save(SiteConfiguration $siteConfiguration)
     {
         $this->setDate($siteConfiguration, 'restrictDoctorAccessAt');
         $this->setDate($siteConfiguration, 'restrictCoordinatorAccessAt');

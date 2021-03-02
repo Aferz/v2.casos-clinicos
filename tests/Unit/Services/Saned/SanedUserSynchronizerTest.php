@@ -19,7 +19,7 @@ class SanedUserSynchronizerTest extends UnitTestCase
      * @test
      * @dataProvider findDataProvider
      */
-    public function find(string $method, string | int $id): void
+    public function find(string $method, $id): void
     {
         $this->createRemoteUser();
 
@@ -82,7 +82,7 @@ class SanedUserSynchronizerTest extends UnitTestCase
      * @test
      * @dataProvider synchronizeFromRemoteToLocalDataProvider
      **/
-    public function synchronize_from_remote_to_local_create(string $method, string | int $id): void
+    public function synchronize_from_remote_to_local_create(string $method, $id): void
     {
         $this->createRemoteUser();
 
@@ -112,7 +112,7 @@ class SanedUserSynchronizerTest extends UnitTestCase
      * @test
      * @dataProvider synchronizeFromRemoteToLocalDataProvider
      **/
-    public function synchronize_from_remote_to_local_update(string $method, string | int $id): void
+    public function synchronize_from_remote_to_local_update(string $method, $id): void
     {
         $this->createRemoteUser();
 
@@ -247,7 +247,7 @@ class SanedUserSynchronizerTest extends UnitTestCase
      * @test
      * @dataProvider updateRemotePasswordDataProvider
      **/
-    public function update_remote_password(string $method, string | int $id): void
+    public function update_remote_password(string $method, $id): void
     {
         $this->createRemoteUser();
 

@@ -8,9 +8,14 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class GetClinicalCaseChildrenCommentsQuery
 {
-    public function __construct(
-        protected int | string | ClinicalCaseComment $parentComment
-    ) {
+    /**
+     * @var int|string|ClinicalCaseComment
+     */
+    protected $parentComment;
+
+    public function __construct($parentComment)
+    {
+        $this->parentComment = $parentComment;
     }
 
     public function paginate(
@@ -18,7 +23,7 @@ class GetClinicalCaseChildrenCommentsQuery
         int $perPage = 15
     ): LengthAwarePaginator {
         return $this->query()
-            ->paginate(perPage: $perPage, page: $page);
+            ->paginate($perPage, ['*'], 'page', $page);
     }
 
     protected function query(): Builder

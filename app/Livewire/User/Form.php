@@ -54,7 +54,10 @@ class Form extends Component
         return $rules;
     }
 
-    public function save(): RedirectResponse | Redirector
+    /**
+     * @return RedirectResponse|Redirector
+     */
+    public function save()
     {
         $validatedData = $this->validateForm();
 
@@ -67,7 +70,10 @@ class Form extends Component
         return redirect()->route('users.index', ['role' => $this->role]);
     }
 
-    public function create(): RedirectResponse | Redirector
+    /**
+     * @return RedirectResponse|Redirector
+     */
+    public function create()
     {
         return $this->save();
     }

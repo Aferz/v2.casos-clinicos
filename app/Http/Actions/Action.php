@@ -10,9 +10,11 @@ use Illuminate\Http\Request;
 
 class Action
 {
-    public function __construct(
-        protected Request $request
-    ) {
+    protected Request $request;
+
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
     }
 
     protected function authorize(Closure $fn): void
@@ -22,7 +24,11 @@ class Action
         }
     }
 
-    protected function authorizeUserTo(string $ability, string | Model $model): void
+    /**
+     * @param string $ability;
+     * @param string|Model $model;
+     */
+    protected function authorizeUserTo(string $ability, $model): void
     {
         $this->authorize(function () use ($ability, $model) {
             return $this->user() && $this->user()->can($ability, $model);

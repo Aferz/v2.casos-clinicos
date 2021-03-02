@@ -3,16 +3,18 @@
 namespace App\Mail\Auth;
 
 use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
 
 class ResetPassword extends Mailable
 {
-    use SerializesModels;
+    protected string $token;
+    protected string $email;
 
     public function __construct(
-        protected string $token,
-        protected string $email
+        string $token,
+        string $email
     ) {
+        $this->token = $token;
+        $this->email = $email;
     }
 
     public function build(): self

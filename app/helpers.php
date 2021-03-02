@@ -4,7 +4,10 @@ use App\Models\SiteConfiguration;
 use Illuminate\Database\Eloquent\Model;
 
 if (! function_exists('id')) {
-    function id(int | string | Model $value = null)
+    /**
+     * @param int|string|Model $value
+     */
+    function id($value = null)
     {
         if (is_null($value)) {
             return $value;

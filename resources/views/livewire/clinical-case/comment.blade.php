@@ -61,7 +61,7 @@
             <x-icon-cheveron-down class="h-5 w-5" />
 
             <x-button.link wire:click="loadReplies">
-                @php($remaining = $childCommentsCount - $replies?->count() ?? 0)
+                @php($remaining = $childCommentsCount - ($replies ? $replies->count() : 0))
                 @php($loadRemaining = $remaining > $repliesPerPage ? $repliesPerPage : $remaining)
 
                 {{ trans_choice('Load :count reply more|Load :count replies more', $loadRemaining, [

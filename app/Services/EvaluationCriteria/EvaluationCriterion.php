@@ -9,14 +9,24 @@ use Illuminate\View\View;
 
 abstract class EvaluationCriterion
 {
-    public function __construct(
-        protected string $name,
-        protected array $data = []
-    ) {
+    protected string $name;
+    protected array $data;
+
+    public function __construct(string $name, array $data = [])
+    {
+        $this->name = $name;
+        $this->data = $data;
     }
 
-    abstract protected function renderEvaluation(Evaluation $evaluation): string | View;
-    abstract protected function renderEvaluationForm(array $attributes): string | View;
+    /**
+     * @return string | View
+     */
+    abstract protected function renderEvaluation(Evaluation $evaluation);
+
+    /**
+     * @return string | View
+     */
+    abstract protected function renderEvaluationForm(array $attributes);
 
     public function name(): string
     {
@@ -28,7 +38,10 @@ abstract class EvaluationCriterion
         return $this->data['theme'];
     }
 
-    public function factory(Generator $faker): mixed
+    /**
+     * @return mixed
+     */
+    public function factory(Generator $faker)
     {
         $data = $this->getFactoryInstructions($faker);
 
@@ -52,7 +65,10 @@ abstract class EvaluationCriterion
         return $this->getValidationInstructions();
     }
 
-    public function render(Evaluation $evaluation): string | View
+    /**
+     * @return string | View
+     */
+    public function render(Evaluation $evaluation)
     {
         return view('components.evaluation.evaluation', [
             'criterion' => $evaluation->criterion,
@@ -62,7 +78,10 @@ abstract class EvaluationCriterion
         ]);
     }
 
-    public function renderForm(array $attributes): string | View
+    /**
+     * @return string | View
+     */
+    public function renderForm(array $attributes)
     {
         return view('components.evaluation.evaluation-form', [
             'criterion' => $this->name(),

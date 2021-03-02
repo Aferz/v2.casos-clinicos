@@ -23,7 +23,7 @@ class ClinicalCase extends Model
     protected $casts = [
         'highlighted' => 'boolean',
         'sent_at' => 'datetime',
-        'published_at' => 'datetime'
+        'published_at' => 'datetime',
     ];
 
     protected $dispatchesEvents = [
@@ -105,29 +105,44 @@ class ClinicalCase extends Model
         return !$this->isPublished();
     }
 
-    public function like(string | int | User $user): void
+    /**
+     * @param string|int|User $user
+     */
+    public function like($user): void
     {
         if (! $this->isLikedBy($user)) {
             $this->likes()->create(['user_id' => id($user)]);
         }
     }
 
-    public function unlike(string | int | User $user): void
+    /**
+     * @param string|int|User $user
+     */
+    public function unlike($user): void
     {
         if ($this->isLikedBy($user)) {
-            $this->likes()
+            $exist = $this->likes()
                 ->where('user_id', id($user))
-                ->first()
-                ?->delete();
+                ->first();
+
+            if ($exist) {
+                $exist->delete();
+            }
         }
     }
 
-    public function isLikedBy(string | int | User $user): bool
+    /**
+     * @param string|int|User $user
+     */
+    public function isLikedBy($user): bool
     {
         return $this->likes()->where('user_id', id($user))->exists();
     }
 
-    public function isEvaluatedBy(string | int | User $user): bool
+    /**
+     * @param string|int|User $user
+     */
+    public function isEvaluatedBy($user): bool
     {
         return $this->evaluations()
             ->where('user_id', id($user))
@@ -154,21 +169,21 @@ class ClinicalCase extends Model
     public function showUrl(array $params = []): string
     {
         return route('clinical-cases.show', array_merge($params, [
-            $this->{static::routeModelBindingIdField()}
+            $this->{static::routeModelBindingIdField()},
         ]));
     }
 
     public function editUrl(array $params = []): string
     {
         return route('clinical-cases.edit', array_merge($params, [
-            $this->{static::routeModelBindingIdField()}
+            $this->{static::routeModelBindingIdField()},
         ]));
     }
 
     public function exportUrl(array $params = []): string
     {
         return route('clinical-cases.export', array_merge($params, [
-            $this->{static::routeModelBindingIdField()}
+            $this->{static::routeModelBindingIdField()},
         ]));
     }
 

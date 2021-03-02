@@ -45,7 +45,10 @@ class Comment extends Component
         return view('livewire.clinical-case.comment');
     }
 
-    public function delete(): RedirectResponse | Redirector
+    /**
+     * @return RedirectResponse|Redirector
+     */
+    public function delete()
     {
         $comment = ClinicalCaseComment::find($this->commentId);
 

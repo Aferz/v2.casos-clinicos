@@ -10,9 +10,12 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class UsersExport implements FromCollection, WithHeadings
 {
+    protected string $role;
+
     public function __construct(
-        protected string $role,
+        string $role
     ) {
+        $this->role = $role;
     }
 
     public function headings(): array

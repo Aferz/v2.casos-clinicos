@@ -9,7 +9,10 @@ use YoHang88\LetterAvatar\LetterAvatar;
 
 class GenerateUserAvatar
 {
-    public function handle(UserCreated | UserSaved $event)
+    /**
+     * @param UserCreated|UserSaved $event
+     */
+    public function handle($event)
     {
         $user = $event->user;
 

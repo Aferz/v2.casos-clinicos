@@ -30,7 +30,10 @@ class TextField extends Field
         'send' => 'required|string',
     ];
 
-    public function renderForm(ViewErrorBag $errors): string | View
+    /**
+     * @return string|View
+     */
+    public function renderForm(ViewErrorBag $errors)
     {
         $data = $this->getRenderInstructions();
 

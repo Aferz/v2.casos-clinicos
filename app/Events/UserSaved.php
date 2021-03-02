@@ -11,8 +11,11 @@ class UserSaved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public User $user;
+
     public function __construct(
-        public User $user
+        User $user
     ) {
+        $this->user = $user;
     }
 }

@@ -11,10 +11,15 @@ class GetUsersForAdminQuery
 {
     use Concerns\Orderable;
 
+    protected string $role;
+    protected ?string $order = null;
+
     public function __construct(
-        protected string $role,
-        protected ?string $order = null
+        string $role,
+        ?string $order = null
     ) {
+        $this->role = $role;
+        $this->order = $order;
     }
 
     public function get(): Collection
@@ -27,7 +32,7 @@ class GetUsersForAdminQuery
         int $perPage = 15
     ): LengthAwarePaginator {
         $paginator = $this->query()
-            ->paginate(perPage: $perPage, page: $page)
+            ->paginate($perPage, ['*'], 'page', $page)
             ->onEachSide(1);
 
         if ($this->role !== 'all') {

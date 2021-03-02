@@ -18,7 +18,10 @@ class NumericEvaluationCriterion extends EvaluationCriterion
         return $this->data['max'];
     }
 
-    protected function renderEvaluation(Evaluation $evaluation): string | View
+    /**
+     * @return string | View
+     */
+    protected function renderEvaluation(Evaluation $evaluation)
     {
         if ($this->theme() === 'stars') {
             return view('components.evaluation.numeric-icons', [
@@ -57,7 +60,10 @@ class NumericEvaluationCriterion extends EvaluationCriterion
         ]);
     }
 
-    protected function renderEvaluationForm(array $attributes): string | View
+    /**
+     * @return string|View
+     */
+    protected function renderEvaluationForm(array $attributes)
     {
         if ($this->theme() === 'stars') {
             return view('components.evaluation.numeric-icons', [
