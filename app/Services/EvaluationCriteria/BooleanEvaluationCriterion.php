@@ -15,7 +15,10 @@ class BooleanEvaluationCriterion extends EvaluationCriterion
 
     protected string $validationDefaults = 'required|boolean';
 
-    protected function renderEvaluation(Evaluation $evaluation): string | View
+    /**
+     * @return string|View
+     */
+    protected function renderEvaluation(Evaluation $evaluation)
     {
         return view('components.evaluation.boolean-buttons', [
             'labelTrue' => __('Yes'),
@@ -26,7 +29,10 @@ class BooleanEvaluationCriterion extends EvaluationCriterion
         ]);
     }
 
-    protected function renderEvaluationForm(array $attributes): string | View
+    /**
+     * @return string|View
+     */
+    protected function renderEvaluationForm(array $attributes)
     {
         return view('components.evaluation.boolean-buttons', [
             'labelTrue' => __('Yes'),

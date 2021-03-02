@@ -29,7 +29,10 @@ class BooleanField extends Field
         'send' => 'required|boolean',
     ];
 
-    public function renderForm(ViewErrorBag $errors): string | View
+    /**
+     * @return string|View
+     */
+    public function renderForm(ViewErrorBag $errors)
     {
         $data = $this->getRenderInstructions();
 

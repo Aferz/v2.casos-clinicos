@@ -10,9 +10,12 @@ class Registered extends Mailable
 {
     use SerializesModels;
 
+    protected User $user;
+
     public function __construct(
-        protected User $user
+        User $user
     ) {
+        $this->user = $user;
     }
 
     public function build(): self

@@ -29,7 +29,10 @@ class StringField extends Field
         'send' => 'required|string|max:255',
     ];
 
-    public function renderForm(ViewErrorBag $errors): string | View
+    /**
+     * @return string|View
+     */
+    public function renderForm(ViewErrorBag $errors)
     {
         $data = $this->getRenderInstructions();
 

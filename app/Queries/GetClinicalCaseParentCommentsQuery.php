@@ -10,9 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 class GetClinicalCaseParentCommentsQuery
 {
-    public function __construct(
-        protected int | string | ClinicalCase $clinicalCase
-    ) {
+    /**
+     * @var int|string|ClinicalCase
+     */
+    protected $clinicalCase;
+
+    public function __construct($clinicalCase)
+    {
+        $this->clinicalCase = $clinicalCase;
     }
 
     public function paginate(
@@ -20,7 +25,7 @@ class GetClinicalCaseParentCommentsQuery
         int $perPage = 15
     ): LengthAwarePaginator {
         return $this->query()
-            ->paginate(perPage: $perPage, page: $page);
+            ->paginate($perPage, ['*'], 'page', $page);
     }
 
     protected function query(): Builder

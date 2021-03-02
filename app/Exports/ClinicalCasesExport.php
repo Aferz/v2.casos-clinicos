@@ -10,11 +10,18 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class ClinicalCasesExport implements FromCollection, WithHeadings
 {
+    protected string $titleFieldName;
+    protected string $status;
+    protected int $minToAllowPublication;
+
     public function __construct(
-        protected string $titleFieldName,
-        protected string $status,
-        protected int $minToAllowPublication
+        string $titleFieldName,
+        string $status,
+        int $minToAllowPublication
     ) {
+        $this->titleFieldName = $titleFieldName;
+        $this->status = $status;
+        $this->minToAllowPublication = $minToAllowPublication;
     }
 
     public function headings(): array

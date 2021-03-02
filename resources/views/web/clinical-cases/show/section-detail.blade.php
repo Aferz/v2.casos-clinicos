@@ -23,7 +23,9 @@
             </div>
 
             <div class="mt-1 space-y-8 text-gray-700">
-                @if ($field instanceof \App\Services\Fields\BooleanField)
+                @if ($field->name() === 'speciality')
+                    {{ __(\App\Models\ClinicalCaseSpeciality::find($clinicalCase->{$field->name()})->name) }}
+                @elseif ($field instanceof \App\Services\Fields\BooleanField)
                     {{ $clinicalCase->{$field->name()} === 1 ? __('Yes') : __('No') }}
                 @else
                     {{ $clinicalCase->{$field->name()} }}

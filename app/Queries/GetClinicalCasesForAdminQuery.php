@@ -13,12 +13,21 @@ class GetClinicalCasesForAdminQuery
 {
     use Concerns\Orderable;
 
+    protected string $titleFieldName;
+    protected string $status;
+    protected int $minToAllowPublication;
+    protected ?string $order = null;
+
     public function __construct(
-        protected string $titleFieldName,
-        protected string $status,
-        protected int $minToAllowPublication,
-        protected ?string $order = null
+        string $titleFieldName,
+        string $status,
+        int $minToAllowPublication,
+        ?string $order = null
     ) {
+        $this->titleFieldName = $titleFieldName;
+        $this->status = $status;
+        $this->minToAllowPublication = $minToAllowPublication;
+        $this->order = $order;
     }
 
     public function get(): Collection
@@ -31,7 +40,7 @@ class GetClinicalCasesForAdminQuery
         int $perPage = 15
     ): LengthAwarePaginator {
         $paginator = $this->query()
-            ->paginate(perPage: $perPage, page: $page)
+            ->paginate($perPage, ['*'], 'page', $page)
             ->onEachSide(1);
 
         if ($this->status !== 'all') {

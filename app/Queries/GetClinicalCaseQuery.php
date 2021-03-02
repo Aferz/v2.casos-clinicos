@@ -12,10 +12,20 @@ use Illuminate\Support\Facades\DB;
 
 class GetClinicalCaseQuery
 {
-    public function __construct(
-        protected int | string | ClinicalCase $clinicalCase,
-        protected int | string | User $user
-    ) {
+    /**
+     * @var int|string|ClinicalCase
+     */
+    protected $clinicalCase;
+
+    /**
+     * @var int|string|User
+     */
+    protected $user;
+
+    public function __construct($clinicalCase, $user)
+    {
+        $this->clinicalCase = $clinicalCase;
+        $this->user = $user;
     }
 
     public function get(): ClinicalCase

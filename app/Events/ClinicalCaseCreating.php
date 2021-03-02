@@ -11,8 +11,11 @@ class ClinicalCaseCreating
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public ClinicalCase $clinicalCase;
+
     public function __construct(
-        public ClinicalCase $clinicalCase
+        ClinicalCase $clinicalCase
     ) {
+        $this->clinicalCase = $clinicalCase;
     }
 }

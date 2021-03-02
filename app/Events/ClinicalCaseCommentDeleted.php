@@ -11,8 +11,11 @@ class ClinicalCaseCommentDeleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public ClinicalCaseComment $clinicalCaseComment;
+
     public function __construct(
-        public ClinicalCaseComment $clinicalCaseComment
+        ClinicalCaseComment $clinicalCaseComment
     ) {
+        $this->clinicalCaseComment = $clinicalCaseComment;
     }
 }

@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PreventUserLogin
 {
-    public function __construct(
-        protected SiteConfiguration $siteConfiguration
-    ) {
+    protected SiteConfiguration $siteConfiguration;
+
+    public function __construct(SiteConfiguration $siteConfiguration)
+    {
+        $this->siteConfiguration = $siteConfiguration;
     }
 
     public function handle(Request $request, Closure $next)

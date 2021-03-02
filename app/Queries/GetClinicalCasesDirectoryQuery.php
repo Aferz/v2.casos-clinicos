@@ -12,11 +12,19 @@ use Illuminate\Support\Facades\DB;
 
 class GetClinicalCasesDirectoryQuery
 {
-    public function __construct(
-        protected int | string | User $user,
-        protected string $titleFieldName,
-        protected string $bodyFieldName
-    ) {
+    /**
+     * @var int|string|User
+     */
+    protected $user;
+
+    protected string $titleFieldName;
+    protected string $bodyFieldName;
+
+    public function __construct($user, string $titleFieldName, string $bodyFieldName)
+    {
+        $this->user = $user;
+        $this->titleFieldName = $titleFieldName;
+        $this->bodyFieldName = $bodyFieldName;
     }
 
     public function paginate(
@@ -25,7 +33,7 @@ class GetClinicalCasesDirectoryQuery
     ): LengthAwarePaginator {
         return $this->query()
             ->where('highlighted', false)
-            ->paginate(perPage: $perPage, page: $page)
+            ->paginate($perPage, ['*'], 'page', $page)
             ->onEachSide(1);
     }
 

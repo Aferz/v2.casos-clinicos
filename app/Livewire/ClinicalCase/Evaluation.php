@@ -26,7 +26,7 @@ class Evaluation extends Component
     protected Collection $existingEvaluations;
 
     public function mount(
-        EvaluationCommentsFeature $evaluationCommentsFeature,
+        EvaluationCommentsFeature $evaluationCommentsFeature
     ): void {
         $this->commentsAreEnabled = $evaluationCommentsFeature->enabled();
         $this->commentsRules = $evaluationCommentsFeature->rules();
@@ -45,7 +45,10 @@ class Evaluation extends Component
         return view('livewire.clinical-case.evaluation');
     }
 
-    public function evaluate(): RedirectResponse | Redirector
+    /**
+     * @return RedirectResponse|Redirector
+     */
+    public function evaluate()
     {
         $this->validateCriteria();
         $this->createEvaluations();

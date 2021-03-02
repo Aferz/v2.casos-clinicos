@@ -19,4 +19,13 @@ abstract class TestCase extends BaseTestCase
 
         return parent::setUpTraits();
     }
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('db:seed', [
+            '--class' => 'ProductionSeeder',
+        ]);
+    }
 }

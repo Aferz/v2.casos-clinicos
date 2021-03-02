@@ -29,7 +29,10 @@ class SelectField extends Field
         'send' => 'required',
     ];
 
-    public function renderForm(ViewErrorBag $errors): string | View
+    /**
+     * @return string|View
+     */
+    public function renderForm(ViewErrorBag $errors)
     {
         $data = $this->getRenderInstructions();
 

@@ -24,7 +24,10 @@ class Form extends Component
         return view('livewire.clinical-case.form.index');
     }
 
-    public function save(): RedirectResponse | Redirector
+    /**
+     * @return RedirectResponse|Redirector
+     */
+    public function save()
     {
         $this->validateForm();
 
@@ -41,7 +44,10 @@ class Form extends Component
         return redirect()->route('clinical-cases.index', ['status' => 'draft']);
     }
 
-    public function send(): RedirectResponse | Redirector
+    /**
+     * @return RedirectResponse|Redirector
+     */
+    public function send()
     {
         $this->sending = true;
 

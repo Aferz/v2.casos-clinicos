@@ -14,12 +14,25 @@ class GetClinicalCasesForCoordinatorQuery
 {
     use Concerns\Orderable;
 
+    /**
+     * @var int|string|User
+     */
+    protected $user;
+
+    protected string $titleFieldName;
+    protected string $status;
+    protected ?string $order = null;
+
     public function __construct(
-        protected int | string | User $user,
-        protected string $titleFieldName,
-        protected string $status,
-        protected ?string $order = null
+        $user,
+        string $titleFieldName,
+        string $status,
+        ?string $order = null
     ) {
+        $this->user = $user;
+        $this->titleFieldName = $titleFieldName;
+        $this->status = $status;
+        $this->order = $order;
     }
 
     public function paginate(
@@ -27,7 +40,7 @@ class GetClinicalCasesForCoordinatorQuery
         int $perPage = 15
     ): LengthAwarePaginator {
         $paginator = $this->query()
-            ->paginate(perPage: $perPage, page: $page)
+            ->paginate($perPage, ['*'], 'page', $page)
             ->onEachSide(1);
 
         if ($this->status !== 'all') {

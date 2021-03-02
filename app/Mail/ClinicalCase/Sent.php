@@ -10,9 +10,12 @@ class Sent extends Mailable
 {
     use SerializesModels;
 
+    protected ClinicalCase $clinicalCase;
+
     public function __construct(
-        protected ClinicalCase $clinicalCase
+        ClinicalCase $clinicalCase
     ) {
+        $this->clinicalCase = $clinicalCase;
     }
 
     public function build(): self

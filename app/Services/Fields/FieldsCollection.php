@@ -7,14 +7,17 @@ use Illuminate\Support\Collection;
 
 class FieldsCollection extends Collection
 {
-    public function exceptName(array | string $name): static
+    /**
+     * @param array|string $name
+     */
+    public function exceptName($name): self
     {
         $name = Arr::wrap($name);
 
         return $this->filter(fn (Field $field) => !in_array($field->name(), $name));
     }
 
-    public function rules(string $type): static
+    public function rules(string $type): self
     {
         return $this->mapWithKeys(fn (Field $field) => [
             $field->name() => $field->rules($type),

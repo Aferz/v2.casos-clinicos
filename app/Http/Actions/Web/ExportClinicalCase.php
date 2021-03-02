@@ -13,7 +13,10 @@ use ZipArchive;
 
 class ExportClinicalCase extends Action
 {
-    public function __invoke(ClinicalCase $clinicalCase): Response | BinaryFileResponse
+    /**
+     * @return Response|BinaryFileResponse
+     */
+    public function __invoke(ClinicalCase $clinicalCase)
     {
         $this->authorizeUserTo('exportList', ClinicalCase::class);
 
