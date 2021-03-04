@@ -1,3 +1,5 @@
 *
 !public/
+!public/images/login.jpg
+!test/
 !.gitignore
